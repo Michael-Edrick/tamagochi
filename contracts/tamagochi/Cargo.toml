@@ -1,0 +1,19 @@
+[package]
+name = "Tamagochi"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+soroban-sdk = { workspace = true }
+rand = { workspace = true }
+rand_core = { workspace = true }
+getrandom = { version = "0.2", features = ["js"] }
+
+[dev_dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+
+[features]
+testutils = ["soroban-sdk/testutils"]
