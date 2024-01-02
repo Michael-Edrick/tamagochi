@@ -19,7 +19,7 @@ pub struct TamagotchiContract;
 impl TamagotchiContract { 
     pub fn feed(env: Env, meal_type: String) -> Tamagotchi {
         // Get current state
-        let mut tamagotchi = Self::get_state(env.clone());
+        let mut tamagotchi = Self::getstate(env.clone());
 
         // Check if the Tamagotchi is sick
         if tamagotchi.is_sick {
@@ -54,7 +54,7 @@ impl TamagotchiContract {
 
     pub fn play(env: Env, guess: String) -> String {
         // Get current state
-        let mut tamagotchi = Self::get_state(env.clone());
+        let mut tamagotchi = Self::getstate(env.clone());
 
         //initial value of result
         let mut result = soroban_sdk::String::from_str(&env ,"sick");
@@ -90,7 +90,7 @@ impl TamagotchiContract {
 
     pub fn medicine(env: Env) -> Tamagotchi {
         // Get current state
-        let mut tamagotchi = Self::get_state(env.clone());
+        let mut tamagotchi = Self::getstate(env.clone());
 
         // Check is sick status
         if tamagotchi.is_sick {
@@ -104,7 +104,7 @@ impl TamagotchiContract {
     }
 
     /// Return the current state.
-    pub fn get_state(env: Env) -> Tamagotchi {
+    pub fn getstate(env: Env) -> Tamagotchi {
         env.storage().instance().get(&PET).unwrap_or(Tamagotchi {
             weight: 0,
             hungry_meter: 0,

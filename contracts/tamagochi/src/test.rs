@@ -29,7 +29,7 @@ fn test() {
 
     // Test Get State after feeding
     assert_eq!(
-        client.get_state(),
+        client.getstate(),
         Tamagotchi {
             weight: 1,
             hungry_meter: 1,
@@ -62,7 +62,7 @@ fn test() {
 
     // Test Get State after giving medicine
     assert_eq!(
-        client.get_state(),
+        client.getstate(),
         Tamagotchi {
             weight: 3,
             hungry_meter: 4,

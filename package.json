@@ -7,9 +7,19 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "clean": "rm -rf .soroban node_modules/.vite",
+    "create_deployer": "soroban config identity generate alice && soroban config identity fund alice --network testnet",
+    "deploy:tamagochi": "soroban contract deploy --wasm target/wasm32-unknown-unknown/release/Tamagochi.wasm --source alice --network testnet > .soroban/Tamagochi-id",
+    "deploy": "npm run deploy:tamagochi",
+    "setup": "soroban contract build && if [ ! -d .soroban ]; then npm run create_deployer && npm run deploy; fi",
+    "bindings:tamagochi": "soroban contract bindings typescript --network testnet --contract-id $(cat .soroban/Tamagochi-id) --output-dir node_modules/tamagochi-soroban-client",
+    "postinstall": "if [ ! -d .soroban ]; then npm run setup; fi && npm run bindings:tamagochi",
+    "reset": "npm run clean && npm run setup"
   },
   "dependencies": {
-    "astro": "^4.0.8"
+    "@stellar/freighter-api": "^1.7.1",
+    "astro": "^4.0.8",
+    "svelte": "^4.2.8"
   }
 }
